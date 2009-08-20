@@ -15,17 +15,16 @@
  */
 package org.springmodules.jcr.jackrabbit;
 
-import java.rmi.registry.Registry;
-
-import javax.jcr.Repository;
-
 import org.apache.jackrabbit.rmi.remote.RemoteRepository;
 import org.apache.jackrabbit.rmi.server.RemoteAdapterFactory;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
+import javax.jcr.Repository;
+import java.rmi.registry.Registry;
+
 /**
  * FactoryBean for creating Jackrabbit RMI remote repository. Use Spring's
- * RmiRegistryFactoryBean for retriving/creating a Rmi Registry used for binding
+ * RmiRegistryFactoryBean for retrieving/creating a Rmi Registry used for binding
  * the repository. Consider Spring's remoting capabilities when dealing with
  * Serializable objects.
  * 

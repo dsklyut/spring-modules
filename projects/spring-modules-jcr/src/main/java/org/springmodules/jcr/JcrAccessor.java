@@ -6,14 +6,13 @@
  */
 package org.springmodules.jcr;
 
-import java.io.IOException;
-
-import javax.jcr.RepositoryException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
+
+import javax.jcr.RepositoryException;
+import java.io.IOException;
 
 /**
  * Base class for JcrTemplate and JcrInterceptor, defining common properties
@@ -29,7 +28,7 @@ import org.springframework.dao.DataAccessException;
  */
 public abstract class JcrAccessor implements InitializingBean {
 
-	protected final Log logger = LogFactory.getLog(getClass());
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private SessionFactory sessionFactory;
 

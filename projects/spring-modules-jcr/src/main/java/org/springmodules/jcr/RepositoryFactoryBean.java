@@ -6,14 +6,14 @@
  */
 package org.springmodules.jcr;
 
-import javax.jcr.Repository;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
+
+import javax.jcr.Repository;
 
 /**
  * Base class with common functionality for creating JCR repositories.
@@ -25,7 +25,7 @@ import org.springframework.core.io.Resource;
 public abstract class RepositoryFactoryBean implements InitializingBean,
 		DisposableBean, FactoryBean {
 
-	protected final Log log = LogFactory.getLog(getClass());
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Repository configuration.

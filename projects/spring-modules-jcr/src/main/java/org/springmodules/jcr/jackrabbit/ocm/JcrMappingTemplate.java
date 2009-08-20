@@ -16,29 +16,9 @@
  */
 package org.springmodules.jcr.jackrabbit.ocm;
 
-import java.io.InputStream;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 import org.apache.jackrabbit.ocm.exception.JcrMappingException;
 import org.apache.jackrabbit.ocm.manager.ObjectContentManager;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.BinaryTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.BooleanTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.ByteArrayTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.CalendarTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.DoubleTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.IntTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.LongTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.StringTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.TimestampTypeConverterImpl;
-import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.UtilDateTypeConverterImpl;
+import org.apache.jackrabbit.ocm.manager.atomictypeconverter.impl.*;
 import org.apache.jackrabbit.ocm.manager.impl.ObjectContentManagerImpl;
 import org.apache.jackrabbit.ocm.mapper.Mapper;
 import org.apache.jackrabbit.ocm.query.Query;
@@ -49,6 +29,16 @@ import org.springmodules.jcr.JcrCallback;
 import org.springmodules.jcr.JcrSystemException;
 import org.springmodules.jcr.JcrTemplate;
 import org.springmodules.jcr.SessionFactory;
+
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import java.io.InputStream;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Template whichs adds mapping support for the Java Content Repository.
@@ -76,6 +66,7 @@ public class JcrMappingTemplate extends JcrTemplate implements
 
 	/**
 	 * @param sessionFactory
+     * @param mapper
 	 */
 	public JcrMappingTemplate(SessionFactory sessionFactory, Mapper mapper) {
 		setSessionFactory(sessionFactory);

@@ -15,9 +15,9 @@
  */
 package org.springmodules.jcr.jackrabbit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jackrabbit.api.JackrabbitNodeTypeManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
@@ -35,8 +35,8 @@ import javax.jcr.Workspace;
  */
 public class JackrabbitSessionFactory extends JcrSessionFactory {
 
-	private static final Log log = LogFactory
-			.getLog(JackrabbitSessionFactory.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(JackrabbitSessionFactory.class);
 
 	/**
 	 * Node definitions in CND format.
@@ -61,16 +61,15 @@ public class JackrabbitSessionFactory extends JcrSessionFactory {
 			JackrabbitNodeTypeManager nodeTypeManager = (JackrabbitNodeTypeManager) ws
 					.getNodeTypeManager();
 
-			boolean debug = log.isDebugEnabled();
-			for (int i = 0; i < nodeDefinitions.length; i++) {
-				Resource resource = nodeDefinitions[i];
-				if (debug)
-					log.debug("adding node type definitions from "
-							+ resource.getDescription());
+			boolean debug = logger.isDebugEnabled();
+            for (Resource resource : nodeDefinitions) {
+                if (debug)
+                    logger.debug("adding node type definitions from "
+                            + resource.getDescription());
 
-				nodeTypeManager.registerNodeTypes(resource.getInputStream(),
-						contentType);
-			}
+                nodeTypeManager.registerNodeTypes(resource.getInputStream(),
+                        contentType);
+            }
 		}
 	}
 

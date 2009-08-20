@@ -16,19 +16,19 @@
  */
 package org.springmodules.jcr.jackrabbit.ocm.test.components.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jackrabbit.ocm.query.Filter;
 import org.apache.jackrabbit.ocm.query.Query;
 import org.apache.jackrabbit.ocm.query.QueryManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springmodules.jcr.jackrabbit.ocm.JcrMappingTemplate;
 import org.springmodules.jcr.jackrabbit.ocm.test.components.ArticleService;
 import org.springmodules.jcr.jackrabbit.ocm.test.components.NewsService;
 import org.springmodules.jcr.jackrabbit.ocm.test.model.Article;
 import org.springmodules.jcr.jackrabbit.ocm.test.model.News;
+
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Default implementation for
@@ -39,7 +39,7 @@ import org.springmodules.jcr.jackrabbit.ocm.test.model.News;
  * 
  */
 public class ArticleServiceImpl implements ArticleService {
-	private static final Log log = LogFactory.getLog(ArticleServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
 	private JcrMappingTemplate jcrMappingtemplate;
 	private NewsService newsService;

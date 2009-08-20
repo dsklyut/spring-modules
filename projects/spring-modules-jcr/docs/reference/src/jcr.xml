@@ -15,7 +15,7 @@
     services" that differentiate a Content Repository from a Data Repository."
     (taken from the JSR-170 description page).</para>
 
-    <para>More information about Java Content Repository (from here on refered
+    <para>More information about Java Content Repository (from here on referred
     as JCR) can be found at <ulink
     url="http://www.jcp.org/en/jsr/detail?id=170">here</ulink>.</para>
 
@@ -53,7 +53,7 @@
 
       <para>JSR-170 doesn't provide a notion of
       <literal>SessionFactory</literal> but rather a repository which based on
-      the credentials and workspace provided returnes a session. The
+      the credentials and workspace provided returns a session. The
       <literal>SessionFactory</literal> interface describes a basic contract
       for retrieving session without any knowledge of credentials, it's
       implementation acting as a wrapper around the
@@ -89,7 +89,7 @@
       supplied as password (with value 'pass') to
       <literal>SimpleCredentials</literal> for user 'bogus'. Note that
       <literal>JcrSessionFactory</literal> can also register namespaces, add
-      listeners and has utility methods for determing the underlying
+      listeners and has utility methods for determining the underlying
       repository properties - see the javadoc and the samples for more
       information.</para>
 

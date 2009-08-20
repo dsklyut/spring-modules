@@ -6,12 +6,11 @@
  */
 package org.springmodules.jcr;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.xerces.util.XMLChar;
 
 import javax.jcr.Repository;
-
-import org.apache.xerces.util.XMLChar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utility class for Java Content Repository. The hex escaping/unescaping is
@@ -215,7 +214,7 @@ public abstract class JcrUtils {
 	/**
 	 * Escapes the Jcr names using ISO 9075 encoding.
 	 * 
-	 * @param unescaped
+	 * @param decoded
 	 * @return
 	 */
 	public static String encode(String decoded) {
@@ -225,7 +224,7 @@ public abstract class JcrUtils {
 	/**
 	 * Decodes the Jcr names using ISO 9075 decoding.
 	 * 
-	 * @param escaped
+	 * @param encoded
 	 * @return
 	 */
 	public static String decode(String encoded) {

@@ -1,8 +1,8 @@
 package org.springmodules.jcr;
 
-import javax.jcr.Node;
-
 import org.springframework.dao.DataAccessException;
+
+import javax.jcr.Node;
 
 /**
  * Interface that specifies a basic set of JCR operations. Not often used, but a
@@ -28,7 +28,7 @@ public interface JcrOperations extends JcrOptionalOperations {
 	 * @throws org.springframework.dao.DataAccessException
 	 *             in case of Jcr errors
 	 */
-	public Object execute(JcrCallback action, boolean exposeNativeSession)
+	public <T> T execute(JcrCallback<T> action, boolean exposeNativeSession)
 			throws DataAccessException;
 
 	/**
@@ -50,7 +50,7 @@ public interface JcrOperations extends JcrOptionalOperations {
 	 *            the <code>JCRCallback</code> that executes the client
 	 *            operation
 	 */
-	public Object execute(JcrCallback callback) throws DataAccessException;
+	public <T> T execute(JcrCallback<T> callback) throws DataAccessException;
 
 	/**
 	 * Dump the contents of the given node in a String. This method parses the

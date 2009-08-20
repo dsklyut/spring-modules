@@ -18,9 +18,6 @@ package org.springmodules.jcr.jackrabbit.ocm.test.model;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Simple New class
  * 
@@ -29,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class News {
-	protected final static Log log = LogFactory.getLog(News.class);
 
 	protected String path;
 	protected Date creationDate;

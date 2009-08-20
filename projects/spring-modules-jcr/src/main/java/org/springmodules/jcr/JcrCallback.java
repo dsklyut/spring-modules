@@ -14,7 +14,7 @@ import javax.jcr.Session;
  * @author Costin Leau
  * @author Brian Moseley <bcm@osafoundation.org>
  */
-public interface JcrCallback {
+public interface JcrCallback<T> {
 
 	/**
 	 * Called by {@link JcrTemplate#execute} within an active JCR
@@ -23,9 +23,14 @@ public interface JcrCallback {
 	 * 
 	 * Allows for returning a result object created within the callback, i.e. a
 	 * domain object or a collection of domain objects. A thrown
-	 * {@link RuntimeException} is treated as an application exeception; it is
+	 * {@link RuntimeException} is treated as an application exception; it is
 	 * propagated to the caller of the template.
-	 */
-	public Object doInJcr(Session session) throws IOException,
+     * 
+     * @param session jcr session
+     * @return
+     * @throws java.io.IOException
+     * @throws javax.jcr.RepositoryException
+     */
+	public T doInJcr(Session session) throws IOException,
 			RepositoryException;
 }

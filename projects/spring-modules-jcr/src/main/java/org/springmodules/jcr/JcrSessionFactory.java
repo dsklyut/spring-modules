@@ -1,7 +1,7 @@
 package org.springmodules.jcr;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -53,7 +53,7 @@ import java.util.Properties;
 public class JcrSessionFactory implements InitializingBean, DisposableBean,
         SessionFactory {
 
-    private static final Log log = LogFactory.getLog(JcrSessionFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(JcrSessionFactory.class);
 
     private Repository repository;
 
@@ -133,9 +133,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
 
         // determine the session holder provider
         if (sessionHolderProviderManager == null) {
-            if (log.isDebugEnabled())
-                log
-                        .debug("no session holder provider manager set; using the default one");
+            if (logger.isDebugEnabled())
+                logger.debug("no session holder provider manager set; using the default one");
             sessionHolderProvider = new GenericSessionHolderProvider();
         } else
             sessionHolderProvider = sessionHolderProviderManager
@@ -174,8 +173,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
         if (namespaces == null || namespaces.isEmpty())
             return;
 
-        if (log.isDebugEnabled())
-            log.debug("registering custom namespaces " + namespaces);
+        if (logger.isDebugEnabled())
+            logger.debug("registering custom namespaces " + namespaces);
 
         Session session = getSession();
         NamespaceRegistry registry = session.getWorkspace().getNamespaceRegistry();
@@ -197,8 +196,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
                 String prefix = (String) iter.next();
                 int position = Arrays.binarySearch(prefixes, prefix);
                 if (position >= 0) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("prefix " + prefix
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("prefix " + prefix
                                 + " was already registered; unregistering it");
                     }
                     if (!keepNewNamespaces) {
@@ -221,10 +220,10 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
             int position = Arrays.binarySearch(prefixes, prefix);
 
             if (skipExistingNamespaces && position >= 0) {
-                log.debug("namespace already registered under [" + prefix
+                logger.debug("namespace already registered under [" + prefix
                         + "]; skipping registration");
             } else {
-                log.debug("registering namespace [" + ns + "] under [" + prefix
+                logger.debug("registering namespace [" + ns + "] under [" + prefix
                         + "]");
                 registry.registerNamespace(prefix, ns);
             }
@@ -250,8 +249,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
         if (namespaces == null || namespaces.isEmpty() || keepNewNamespaces)
             return;
 
-        if (log.isDebugEnabled())
-            log.debug("unregistering custom namespaces " + namespaces);
+        if (logger.isDebugEnabled())
+            logger.debug("unregistering custom namespaces " + namespaces);
 
         NamespaceRegistry registry = getSession().getWorkspace()
                 .getNamespaceRegistry();
@@ -262,8 +261,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
         }
 
         if (forceNamespacesRegistration) {
-            if (log.isDebugEnabled())
-                log.debug("reverting back overwritten namespaces "
+            if (logger.isDebugEnabled())
+                logger.debug("reverting back overwritten namespaces "
                         + overwrittenNamespaces);
             if (overwrittenNamespaces != null)
                 for (Iterator iter = overwrittenNamespaces.entrySet()
@@ -300,8 +299,8 @@ public class JcrSessionFactory implements InitializingBean, DisposableBean,
         if (eventListeners != null && eventListeners.length > 0) {
             Workspace ws = session.getWorkspace();
             ObservationManager manager = ws.getObservationManager();
-            if (log.isDebugEnabled())
-                log.debug("adding listeners "
+            if (logger.isDebugEnabled())
+                logger.debug("adding listeners "
                         + Arrays.asList(eventListeners).toString()
                         + " for session " + session);
 

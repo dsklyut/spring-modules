@@ -16,18 +16,18 @@
  */
 package org.springmodules.jcr.jackrabbit.ocm;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jackrabbit.ocm.exception.JcrMappingException;
 import org.apache.jackrabbit.ocm.mapper.impl.digester.DigesterDescriptorReader;
 import org.apache.jackrabbit.ocm.mapper.model.ClassDescriptor;
 import org.apache.jackrabbit.ocm.mapper.model.MappingDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Factory bean for loading mapping files. This factory beans can load several
@@ -39,8 +39,7 @@ import org.springframework.core.io.Resource;
 public class MappingDescriptorFactoryBean implements FactoryBean,
 		InitializingBean {
 
-	private static final Log log = LogFactory
-			.getLog(MappingDescriptorFactoryBean.class);
+	private static final Logger logger = LoggerFactory.getLogger(MappingDescriptorFactoryBean.class);
 
 	private MappingDescriptor mappingDescriptor;
 

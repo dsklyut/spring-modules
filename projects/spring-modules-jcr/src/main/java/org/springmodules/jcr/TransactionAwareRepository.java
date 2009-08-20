@@ -6,19 +6,18 @@
  */
 package org.springmodules.jcr;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
-import javax.jcr.Credentials;
-import javax.jcr.Repository;
-import javax.jcr.Session;
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
+
+import javax.jcr.Credentials;
+import javax.jcr.Repository;
+import javax.jcr.Session;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * This FactoryBean exposes a proxy for a target JCR Repository, returning the
@@ -242,7 +241,7 @@ public class TransactionAwareRepository implements InitializingBean,
 				return (proxy == args[0] ? Boolean.TRUE : Boolean.FALSE);
 			} else if (method.getName().equals("hashCode")) {
 				// Use hashCode of Repository proxy.
-				return new Integer(hashCode());
+				return hashCode();
 			}
 
 			Repository target = getTargetRepository();
@@ -281,7 +280,7 @@ public class TransactionAwareRepository implements InitializingBean,
 				return (proxy == args[0] ? Boolean.TRUE : Boolean.FALSE);
 			} else if (method.getName().equals("hashCode")) {
 				// Use hashCode of Session proxy.
-				return new Integer(hashCode());
+				return hashCode();
 			} else if (method.getName().equals("logout")) {
 				// Handle close method: only close if not within a transaction.
 				if (this.sessionFactory != null) {

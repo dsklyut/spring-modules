@@ -16,20 +16,19 @@
  */
 package org.springmodules.jcr.jackrabbit.ocm;
 
-import java.util.Hashtable;
+import org.apache.jackrabbit.core.jndi.RegistryHelper;
+import org.apache.jackrabbit.ocm.exception.RepositoryException;
+import org.apache.jackrabbit.util.ISO9075;
+import org.apache.jackrabbit.util.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jcr.Repository;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.jackrabbit.core.jndi.RegistryHelper;
-import org.apache.jackrabbit.ocm.exception.RepositoryException;
-import org.apache.jackrabbit.util.ISO9075;
-import org.apache.jackrabbit.util.Text;
+import java.util.Hashtable;
 
 /**
  * Utility class for managing JCR repositories. <b>Note</b>: most of the utility
@@ -50,7 +49,7 @@ public class RepositoryUtil {
 	/** Item path separator */
 	public static final String PATH_SEPARATOR = "/";
 
-	private final static Log log = LogFactory.getLog(RepositoryUtil.class);
+	private final static Logger logger = LoggerFactory.getLogger(RepositoryUtil.class);
 
 	private static final String DEFAULT_PROVIDER_URL = "defaultLocalhost";
 
@@ -180,30 +179,30 @@ public class RepositoryUtil {
 	 */
 	public static void setupSession(Session session) throws RepositoryException {
 		try {
-			log.info("Setup Jcr session setup ...");
+			logger.info("Setup Jcr session setup ...");
 
 			String[] jcrNamespaces = session.getWorkspace()
 					.getNamespaceRegistry().getPrefixes();
 			boolean createNamespace = true;
-			for (int i = 0; i < jcrNamespaces.length; i++) {
-				if (jcrNamespaces[i].equals(OCM_NAMESPACE_PREFIX)) {
-					createNamespace = false;
-					log.debug("Jackrabbit OCM namespace exists.");
-				}
-			}
+            for (String jcrNamespace : jcrNamespaces) {
+                if (jcrNamespace.equals(OCM_NAMESPACE_PREFIX)) {
+                    createNamespace = false;
+                    logger.debug("Jackrabbit OCM namespace exists.");
+                }
+            }
 
 			if (createNamespace) {
 				session.getWorkspace().getNamespaceRegistry()
 						.registerNamespace(OCM_NAMESPACE_PREFIX, OCM_NAMESPACE);
-				log.info("Successfully created Jackrabbit OCM namespace.");
+				logger.info("Successfully created Jackrabbit OCM namespace.");
 			}
 
 			if (session.getRootNode() != null) {
-				log.info("Jcr session setup successfull.");
+				logger.info("Jcr session setup successfull.");
 			}
 
 		} catch (Exception e) {
-			log.error("Error while setting up the jcr session.", e);
+			logger.error("Error while setting up the jcr session.", e);
 			throw new RepositoryException(e.getMessage());
 		}
 	}

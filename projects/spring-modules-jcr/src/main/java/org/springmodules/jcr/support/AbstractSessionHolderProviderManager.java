@@ -6,8 +6,8 @@
  */
 package org.springmodules.jcr.support;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springmodules.jcr.SessionHolderProvider;
 import org.springmodules.jcr.SessionHolderProviderManager;
 
@@ -25,7 +25,7 @@ import java.util.List;
 public abstract class AbstractSessionHolderProviderManager implements
 		SessionHolderProviderManager {
 
-	protected final Log log = LogFactory.getLog(getClass());
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected SessionHolderProvider defaultProvider = new GenericSessionHolderProvider();
 
@@ -53,17 +53,16 @@ public abstract class AbstractSessionHolderProviderManager implements
 			SessionHolderProvider provider = (SessionHolderProvider) providers
 					.get(i);
 			if (provider.acceptsRepository(key)) {
-				if (log.isDebugEnabled())
-					log
-							.debug("specific SessionHolderProvider found for repository "
+				if (logger.isDebugEnabled())
+					logger.debug("specific SessionHolderProvider found for repository "
 									+ key);
 				return provider;
 			}
 		}
 
 		// no provider found - return the default one
-		if (log.isDebugEnabled())
-			log.debug("no specific SessionHolderProvider found for repository "
+		if (logger.isDebugEnabled())
+			logger.debug("no specific SessionHolderProvider found for repository "
 					+ key + "; using the default one");
 		return defaultProvider;
 	}

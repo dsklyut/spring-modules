@@ -29,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class Article {
-	protected final static Log log = LogFactory.getLog(Article.class);
 
 	protected String path;
 	protected String title;

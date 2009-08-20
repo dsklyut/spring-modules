@@ -6,12 +6,11 @@
  */
 package org.springmodules.jcr.support;
 
-import java.util.Map;
-
-import javax.jcr.Repository;
-
 import org.springframework.util.CachingMapDecorator;
 import org.springmodules.jcr.SessionHolderProvider;
+
+import javax.jcr.Repository;
+import java.util.Map;
 
 /**
  * Manager which caches providers in order to avoid lookups.
@@ -50,7 +49,7 @@ public abstract class CacheableSessionHolderProviderManager extends
 	/**
 	 * Method for retrieving the parent functionality.
 	 * 
-	 * @param sf
+	 * @param repository
 	 * @return
 	 */
 	private SessionHolderProvider parentLookup(Repository repository) {

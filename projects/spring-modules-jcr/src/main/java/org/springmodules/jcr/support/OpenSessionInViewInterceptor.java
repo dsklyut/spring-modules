@@ -6,12 +6,8 @@
  */
 package org.springmodules.jcr.support;
 
-import javax.jcr.Session;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -19,6 +15,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springmodules.jcr.SessionFactory;
 import org.springmodules.jcr.SessionFactoryUtils;
 import org.springmodules.jcr.SessionHolder;
+
+import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Spring web HandlerInterceptor that binds a JCR Session to the thread for the
@@ -51,7 +51,7 @@ public class OpenSessionInViewInterceptor extends HandlerInterceptorAdapter
 	 */
 	public static final String PARTICIPATE_SUFFIX = ".PARTICIPATE";
 
-	protected final Log logger = LogFactory.getLog(getClass());
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private SessionFactory sessionFactory;
 

@@ -13,7 +13,7 @@
     <version>0.10-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Spring Modules JCR :: API</name>
+    <name>Spring Modules JCR :: Jackrabbit ImplementationJackrabbitNamespaceHandlerTests</name>
     <inceptionYear>2007</inceptionYear>
 
 

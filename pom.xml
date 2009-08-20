@@ -9,7 +9,8 @@
 
 	<properties>
 		<version.spring>2.5.6</version.spring>
-		<version.easymock>2.4</version.easymock>
+		<version.easymock>2.5.1</version.easymock>
+        <version.easymockclassextension>2.4</version.easymockclassextension>
 	</properties>
 
 	<modules>
@@ -54,7 +55,7 @@
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymockclassextension</artifactId>
-			<version>${version.easymock}</version>
+			<version>${version.easymockclassextension}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymockclassextension</artifactId>
-            <version>${version.easymock}</version>
+            <version>${version.easymockclassextension}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

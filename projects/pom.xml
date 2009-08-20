@@ -27,7 +27,7 @@
         <module>spring-modules-javaspaces</module>
         <module>spring-modules-jbpm30</module>
         <module>spring-modules-jbpm31</module> -->
-        <module>spring-modules-jcr</module>
+        <module>jcr</module>
         <!-- <module>spring-modules-jsr94</module>
         <module>spring-modules-lucene</module>
         <module>spring-modules-ojb</module>

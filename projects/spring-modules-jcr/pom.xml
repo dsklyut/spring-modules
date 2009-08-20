@@ -156,9 +156,23 @@
         <jcr.version>1.0</jcr.version>
         <jackrabbit.version>1.5.0</jackrabbit.version>
         <spring.version>${version.spring}</spring.version>
+        <is.bundlor.enabled>true</is.bundlor.enabled>
+        <bundle.symbolic.name>${project.groupId}.${project.artifactId}</bundle.symbolic.name>
+        <bundle.version>0.10.0.SNAPSHOT</bundle.version>
     </properties>
 
     <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>target/generated-resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

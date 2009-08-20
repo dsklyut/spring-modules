@@ -22,7 +22,7 @@ import org.springmodules.jcr.jackrabbit.RepositoryFactoryBean;
 import org.w3c.dom.Element;
 
 /**
- * Jackrabbit specifc namespace handler.
+ * Jackrabbit specific namespace handler.
  * 
  * @author Costin Leau
  * 
@@ -35,18 +35,22 @@ public class JackrabbitNamespaceHandler extends NamespaceHandlerSupport {
 	 * @see org.springframework.beans.factory.xml.NamespaceHandler#init()
 	 */
 	public void init() {
-		registerBeanDefinitionParser("repository", new JackrabbitRepositoryBeanDefinitionParser());
-		registerBeanDefinitionParser("transaction-manager", new JackrabbitLocalTransactionManagerBeanDefinitionParser());
+		registerBeanDefinitionParser("repository",
+				new JackrabbitRepositoryBeanDefinitionParser());
+		registerBeanDefinitionParser("transaction-manager",
+				new JackrabbitLocalTransactionManagerBeanDefinitionParser());
 	}
 
-	private static class JackrabbitRepositoryBeanDefinitionParser extends AbstractSimpleBeanDefinitionParser {
+	private static class JackrabbitRepositoryBeanDefinitionParser extends
+			AbstractSimpleBeanDefinitionParser {
 
 		protected Class getBeanClass(Element element) {
 			return RepositoryFactoryBean.class;
 		}
 	}
-	
-	private static class JackrabbitLocalTransactionManagerBeanDefinitionParser extends AbstractSimpleBeanDefinitionParser {
+
+	private static class JackrabbitLocalTransactionManagerBeanDefinitionParser
+			extends AbstractSimpleBeanDefinitionParser {
 
 		protected Class getBeanClass(Element element) {
 			return LocalTransactionManager.class;

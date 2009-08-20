@@ -17,7 +17,7 @@ package org.springmodules.jcr.jackrabbit;
 
 import junit.framework.TestCase;
 
-import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
@@ -36,7 +36,7 @@ public class JackrabbitNamespaceHandlerTests extends TestCase {
 						getClass()));
 	}
 
-	private void assertPropertyValue(RootBeanDefinition beanDefinition,
+	private void assertPropertyValue(GenericBeanDefinition beanDefinition,
 			String propertyName, Object expectedValue) {
 		assertEquals("Property [" + propertyName + "] incorrect.",
 				expectedValue, beanDefinition.getPropertyValues()
@@ -48,7 +48,7 @@ public class JackrabbitNamespaceHandlerTests extends TestCase {
 	}
 
 	public void testMinimalDefinition() throws Exception {
-		RootBeanDefinition beanDefinition = (RootBeanDefinition) this.beanFactory
+		GenericBeanDefinition beanDefinition = (GenericBeanDefinition) this.beanFactory
 				.getBeanDefinition("minimal");
 		assertSame(RepositoryFactoryBean.class, beanDefinition.getBeanClass());
 		assertPropertyValue(beanDefinition, "configuration",
@@ -56,7 +56,7 @@ public class JackrabbitNamespaceHandlerTests extends TestCase {
 	}
 
 	public void testExtendedDefinition() throws Exception {
-		RootBeanDefinition beanDefinition = (RootBeanDefinition) this.beanFactory
+		GenericBeanDefinition beanDefinition = (GenericBeanDefinition) this.beanFactory
 				.getBeanDefinition("extended");
 		assertSame(RepositoryFactoryBean.class, (beanDefinition.getBeanClass()));
 		assertPropertyValue(beanDefinition, "configuration", "file:config.xml");
@@ -64,7 +64,7 @@ public class JackrabbitNamespaceHandlerTests extends TestCase {
 	}
 
 	public void testFullDefinition() throws Exception {
-		RootBeanDefinition beanDefinition = (RootBeanDefinition) this.beanFactory
+		GenericBeanDefinition beanDefinition = (GenericBeanDefinition) this.beanFactory
 				.getBeanDefinition("full");
 		assertSame(RepositoryFactoryBean.class, (beanDefinition.getBeanClass()));
 		assertPropertyValue(beanDefinition, "homeDir", "file:///homeDir");
@@ -72,7 +72,7 @@ public class JackrabbitNamespaceHandlerTests extends TestCase {
 	}
 
 	public void testTransactionManager() throws Exception {
-		RootBeanDefinition beanDefinition = (RootBeanDefinition) this.beanFactory
+		GenericBeanDefinition beanDefinition = (GenericBeanDefinition) this.beanFactory
 				.getBeanDefinition("transactionManager");
 		assertSame(LocalTransactionManager.class, (beanDefinition
 				.getBeanClass()));

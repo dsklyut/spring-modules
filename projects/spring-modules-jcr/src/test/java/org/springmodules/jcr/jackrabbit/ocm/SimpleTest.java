@@ -16,102 +16,57 @@
  */
 package org.springmodules.jcr.jackrabbit.ocm;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.Test;
+import static org.junit.Assert.fail;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springmodules.jcr.jackrabbit.ocm.test.components.ArticleService;
 import org.springmodules.jcr.jackrabbit.ocm.test.components.NewsService;
 import org.springmodules.jcr.jackrabbit.ocm.test.model.Article;
 import org.springmodules.jcr.jackrabbit.ocm.test.model.News;
 
+import java.util.Date;
+import java.util.Iterator;
+
 /**
  * Test Mapper
- * 
+ *
  * @author <a href="mailto:christophe.lombart@sword-technologies.com">Christophe
  *         Lombart</a>
  */
-public class SimpleTest extends TestCase {
+@ContextConfiguration(locations = {"classpath:applicationContext-repository.xml"})
+public class SimpleTest extends AbstractJUnit4SpringContextTests {
 
-	/**
-	 * <p>
-	 * Defines the test case name for junit.
-	 * </p>
-	 * 
-	 * @param testName
-	 *            The test case name.
-	 */
-	public SimpleTest(String testName) {
-		super(testName);
-	}
+    @Test
+    public void testComponents() {
+        try {
+            System.out.println("Init Spring");
 
-	/**
-	 * @see junit.framework.TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+            System.out.println("Add article");
+            ArticleService service = (ArticleService) applicationContext
+                    .getBean("org.springmodules.jcr.jackrabbit.ocm.test.components.ArticleService");
+            Article article = new Article();
+            article.setPath("/article");
+            article.setAuthor("Christophe");
+            article.setContent("This is an interesting content");
+            article.setCreationDate(new Date());
+            article.setDescription("This is the article description");
+            article.setTitle("Article Title");
 
-	/**
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	public void tearDown() throws Exception {
-		super.tearDown();
-	}
+            service.createArticle(article);
 
-	public static Test suite() {
-		// All methods starting with "test" will be executed in the test suite.
-		return new TestSuite(SimpleTest.class);
-	}
+            System.out.println("Check News");
+            NewsService newsService = (NewsService) applicationContext
+                    .getBean("org.springmodules.jcr.jackrabbit.ocm.test.components.NewsService");
+            Iterator news = newsService.getNews().iterator();
+            while (news.hasNext()) {
+                News newsFound = (News) news.next();
+                System.out.println("News found : " + newsFound.getContent());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
 
-	public void testComponents() {
-		try {
-			System.out.println("Init Spring");
-			AbstractApplicationContext context = getApplicationContext();
-			// ResourceLoader loader = new DefaultResourceLoader();
-
-			System.out.println("Add article");
-			ArticleService service = (ArticleService) context
-					.getBean("org.springmodules.jcr.jackrabbit.ocm.test.components.ArticleService");
-			Article article = new Article();
-			article.setPath("/article");
-			article.setAuthor("Christophe");
-			article.setContent("This is an interesting content");
-			article.setCreationDate(new Date());
-			article.setDescription("This is the article description");
-			article.setTitle("Article Title");
-
-			service.createArticle(article);
-
-			System.out.println("Check News");
-			NewsService newsService = (NewsService) context
-					.getBean("org.springmodules.jcr.jackrabbit.ocm.test.components.NewsService");
-			Iterator news = newsService.getNews().iterator();
-			while (news.hasNext()) {
-				News newsFound = (News) news.next();
-				System.out.println("News found : " + newsFound.getContent());
-			}
-			context.close();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-	}
-
-	private AbstractApplicationContext getApplicationContext()
-			throws IOException {
-		// new FileSystemXmlApplicationContext("/" + new
-		// ClassPathResource("applicationContext-repository.xml").getFile().getPath());
-		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext-repository.xml");
-		return context;
-	}
-
+    }
 }

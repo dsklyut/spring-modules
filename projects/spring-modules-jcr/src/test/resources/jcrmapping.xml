@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE jackrabbit-ocm PUBLIC "-//The Apache Software Foundation//DTD Repository//EN" "./src/test/resources/jackrabbit-ocm.dtd">
+<!--<!DOCTYPE jackrabbit-ocm PUBLIC "-//The Apache Software Foundation//DTD Repository//EN" "jackrabbit-ocm.dtd">-->
 <jackrabbit-ocm>
 	<class-descriptor className="org.springmodules.jcr.jackrabbit.ocm.test.model.News" discriminator="true">
 		<field-descriptor fieldName="path" path="true" />
